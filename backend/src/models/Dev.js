@@ -1,6 +1,7 @@
-const { Schema, model } = require('mongoose')
+const { Schema, model } = require('mongoose') // Importando apenas Schema e model do pacote mongoose
 
-const DevSchema = new Schema({
+// Criação do schema do banco
+const DevSchema = new Schema({ // Cria automaticamente um campo _id
     name: {
         type: String,
         required: true,
@@ -14,8 +15,16 @@ const DevSchema = new Schema({
         type: String,
         required: true,
     },
+    likes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Dev',
+    }],
+    dislikes: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Dev',
+    }],
 }, {
-    timestamps: true, // cria automaticamente as colunas createdAt e updatedAt.
+    timestamps: true, // Cria automaticamente as colunas createdAt e updatedAt.
 })
 
 module.exports = model('Dev', DevSchema)
